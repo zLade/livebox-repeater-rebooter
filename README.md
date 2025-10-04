@@ -1,7 +1,7 @@
 # Orange Repeater Auto-Rebooter (Docker + Web UI)
 
 Planifie un **redémarrage automatique hebdomadaire** des répéteurs **Orange / Livebox**.
-Une petite **interface Web** permet de configurer l’IP, les identifiants et les commandes de reboot (API SAH), puis de planifier le redémarrage (jour + heure). Le service **journalise** tout (ping avant → reboot → attente → ping après).
+Une petite **interface Web** permet de configurer l’IP, les identifiants puis de planifier le redémarrage (jour + heure). Le service **journalise** tout (ping avant → reboot → attente → ping après).
 
 ## Matériel testé
 
@@ -22,8 +22,6 @@ Une petite **interface Web** permet de configurer l’IP, les identifiants et le
 
 - **UI Web** (port par défaut `3333`) pour renseigner : IP, username, password, **RAW_CURL** login & reboot, **jour/heure**, lecture des **logs**.
 - Mettre le répéteur Wifi en IP Fixe via le DHCP de la livebox (ou votre dhcp)
-- Mode **RAW_CURL only** : vos commandes `curl` sont exécutées telles quelles côté serveur.
-  Variables disponibles : `$IP`, `$USER`, `$PASS`, `$COOKIE_JAR`.
 - **Logs** persistants : `logs/rebooter.log` (affichés aussi dans l’UI).
 
 ## Déploiement rapide (Docker)
