@@ -3,5 +3,14 @@
   "username": "admin",
   "password": "password",
   "dow": "1",
-  "time": "10:30"
+  "time": "07:30",
+  "endpoint": "",
+  "form": {
+    "url": "",
+    "payload": "",
+    "reboot_url": ""
+  },
+  "raw_curl_login": "",
+  "raw_curl_reboot": "",
+  "method": "RAW_CURL"
 }
