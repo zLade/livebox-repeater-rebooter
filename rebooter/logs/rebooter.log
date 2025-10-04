@@ -1,0 +1,17 @@
+2025-10-04 23:12:16 | Checking 192.168.1.2
+2025-10-04 23:12:18 | Repeater reachable before reboot.
+2025-10-04 23:12:18 | Triggering reboot with METHOD=RAW_CURL
+2025-10-04 23:12:19 | Reboot command sent. Waiting 90s...
+2025-10-04 23:13:49 | Verifying it comes back (timeout 600s)
+2025-10-04 23:13:57 | ...still waiting
+2025-10-04 23:14:00 | ✅ Repeater back online.
+2025-10-04 23:14:00 | Done.
+[RUN 2025-10-04T21:14:00.084Z] exit=0
+2025-10-04 23:12:16 | Checking 192.168.1.2
+2025-10-04 23:12:18 | Repeater reachable before reboot.
+2025-10-04 23:12:18 | Triggering reboot with METHOD=RAW_CURL
+2025-10-04 23:12:19 | Reboot command sent. Waiting 90s...
+2025-10-04 23:13:49 | Verifying it comes back (timeout 600s)
+2025-10-04 23:13:57 | ...still waiting
+2025-10-04 23:14:00 | ✅ Repeater back online.
+2025-10-04 23:14:00 | Done.

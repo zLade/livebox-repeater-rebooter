@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  rebooter:
+    build:
+      context: /volume1/docker/rebooter
+      dockerfile: Dockerfile
+    container_name: repeater-rebooter
+    ports:
+      - "3333:3333"         # ← port hôte:conteneur
+    environment:
+      - TZ=Europe/Paris
+      - PORT=3333           # ← l’app Node écoute sur 3333
+    volumes:
+      - /volume1/docker/rebooter/server/config.json:/app/server/config.json
+      - /volume1/docker/rebooter/logs:/app/logs
+      - /volume1/docker/rebooter/server/views:/app/server/views
+    restart: unless-stopped

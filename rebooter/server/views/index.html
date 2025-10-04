@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wi-Fi Repeater Rebooter</title>
+  <style>
+    :root{--bg:#fff;--fg:#0f172a;--muted:#475569;--card:#f8fafc;--border:#e2e8f0;--input-bg:#fff;--input-fg:#0f172a;--button:#2563eb;--button-fg:#fff;--code-bg:#f1f5f9}
+    @media (prefers-color-scheme: dark){:root{--bg:#0b0f1a;--fg:#e5e7eb;--muted:#94a3b8;--card:#111827;--border:#273043;--input-bg:#0f172a;--input-fg:#e5e7eb;--button:#3b82f6;--button-fg:#0b0f1a;--code-bg:#0f172a}}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .container{max-width:860px;margin:2rem auto;padding:0 1rem}
+    h1{font-size:1.6rem;margin:0 0 1rem}
+    fieldset{margin:1rem 0;padding:1rem;border:1px solid var(--border);border-radius:.75rem;background:var(--card)}
+    legend{padding:0 .5rem;font-weight:700}
+    label{display:block;margin:.5rem 0 .25rem;font-weight:600}
+    input,textarea,select{width:100%;padding:.6rem .7rem;border-radius:.6rem;border:1px solid var(--border);background:var(--input-bg);color:var(--input-fg);font:inherit}
+    input:focus,textarea:focus{box-shadow:0 0 0 3px rgba(59,130,246,.35);border-color:#60a5fa;outline:none}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+    @media (max-width:680px){.row{grid-template-columns:1fr}}
+    button{appearance:none;border:none;border-radius:.7rem;padding:.65rem 1.1rem;background:var(--button);color:var(--button-fg);font-weight:700;cursor:pointer}
+    pre{white-space:pre-wrap;word-break:break-word;padding:.9rem;border:1px solid var(--border);border-radius:.75rem;background:var(--code-bg);max-height:420px;overflow:auto}
+    hr{border:none;border-top:1px solid var(--border);margin:1.2rem 0}
+    .hint{color:var(--muted);font-size:.92rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Wi-Fi Repeater Rebooter</h1>
+
+    <form method="post" action="/save">
+      <fieldset>
+        <legend>Device</legend>
+        <label>IP address</label>
+        <input name="ip" placeholder="192.168.1.2" required />
+        <div class="row">
+          <div>
+            <label>Username</label>
+            <input name="username" value="admin" />
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="password" name="password" />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Reboot command (RAW_CURL)</legend>
+        <p class="hint">Les commandes ci-dessous sont exécutées côté serveur. Variables dispo : <code>$IP</code>, <code>$USER</code>, <code>$PASS</code>, <code>$COOKIE_JAR</code>.</p>
+        <label>raw_curl_login</label>
+        <textarea name="raw_curl_login" placeholder="curl -s -c &quot;$COOKIE_JAR&quot; -b &quot;$COOKIE_JAR&quot; ..."></textarea>
+        <label>raw_curl_reboot</label>
+        <textarea name="raw_curl_reboot" placeholder="curl -s -c &quot;$COOKIE_JAR&quot; -b &quot;$COOKIE_JAR&quot; ..."></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>Schedule</legend>
+        <div class="row">
+          <div>
+            <label>Day of week</label>
+            <select name="dow">
+              <option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option>
+              <option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option>
+            </select>
+          </div>
+          <div>
+            <label>Time (24h HH:MM)</label>
+            <input name="time" placeholder="03:30" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$" required />
+          </div>
+        </div>
+        <p class="hint">Time zone via variable d’environnement <code>TZ</code> (par défaut Europe/Paris).</p>
+      </fieldset>
+
+      <button type="submit">Save & Restart scheduler</button>
+    </form>
+
+    <hr />
+
+    <h2>Actions</h2>
+    <form method="post" action="/run-now">
+      <button>Run test reboot now</button>
+    </form>
+
+    <hr />
+
+    <h2>Current config</h2>
+    <pre id="cfg">{{config}}</pre>
+
+    <h2>Tail of log</h2>
+    <pre id="log">{{logTail}}</pre>
+  </div>
+</body>
+</html>
