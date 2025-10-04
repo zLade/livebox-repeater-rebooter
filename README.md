@@ -30,26 +30,26 @@ Une petite **interface Web** permet de configurer l’IP, les identifiants puis 
 2. (Recommandé) Monter les dossiers en volumes : `server/`, `scripts/`, `logs/`.
 3. Utiliser ce `docker-compose.yml` minimal :
 
-   ```yaml
-version: "3.9"
-services:
-  rebooter:
-    build:
-      context: /volume1/docker/rebooter
-      dockerfile: Dockerfile
-    container_name: repeater-rebooter
-    ports:
-      - "3333:3333"
-    environment:
-      - TZ=Europe/Paris
-      - PORT=3333
-    volumes:
-      - /volume1/docker/rebooter/server/config.json:/app/server/config.json
-      - /volume1/docker/rebooter/server/views:/app/server/views
-      - /volume1/docker/rebooter/scripts:/app/scripts        
-      - /volume1/docker/rebooter/logs:/app/logs
-    restart: unless-stopped
-
+   ```
+   yaml
+   version: "3.9"
+   services:
+     rebooter:
+       build:
+         context: /volume1/docker/rebooter
+         dockerfile: Dockerfile
+       container_name: repeater-rebooter
+       ports:
+         - "3333:3333"
+       environment:
+         - TZ=Europe/Paris
+         - PORT=3333
+       volumes:
+         - /volume1/docker/rebooter/server/config.json:/app/server/config.json
+         - /volume1/docker/rebooter/server/views:/app/server/views
+         - /volume1/docker/rebooter/scripts:/app/scripts        
+         - /volume1/docker/rebooter/logs:/app/logs
+       restart: unless-stopped
    ```
 
 4. Lancer :
