@@ -1,0 +1,9 @@
+{
+  "ip": "192.168.1.2",
+  "username": "admin",
+  "password": "ton_mdp",
+  "dow": "1",
+  "time": "10:30",
+  "raw_curl_login": "curl -s -k -c \"$COOKIE_JAR\" -b \"$COOKIE_JAR\" -X POST -H 'Authorization: X-Sah-Login' -H 'Content-Type: application/x-sah-ws-4-call+json' -H \"Origin: http://$IP\" --data '{\"service\":\"sah.Device.Information\",\"method\":\"createContext\",\"parameters\":{\"applicationName\":\"webui\",\"username\":\"'\"$USER\"'\",\"password\":\"'\"$PASS\"'\"}}' \"http://$IP/ws\" | tee \"$COOKIE_JAR.sah.json\" >/dev/null; CONTEXT_ID=$(sed -n 's/.*contextID\\\"\\s*:\\s*\\\"\\([^\\\"]\\+\\)\\\".*/\\1/p' \"$COOKIE_JAR.sah.json\"); printf \"%s\" \"$CONTEXT_ID\" > \"$COOKIE_JAR.ctx\"",
+  "raw_curl_reboot": "CONTEXT_ID=$(tr -d '\\r\\n' < \"$COOKIE_JAR.ctx\"); curl -s -k -c \"$COOKIE_JAR\" -b \"$COOKIE_JAR\" -X POST -H \"Authorization: X-Sah $CONTEXT_ID\" -H \"X-Context: $CONTEXT_ID\" -H 'Content-Type: application/x-sah-ws-4-call+json' -H \"Origin: http://$IP\" --data '{\"service\":\"NMC\",\"method\":\"reboot\",\"parameters\":{\"reason\":\"GUI_Reboot\"}}' \"http://$IP/ws\" >/dev/null"
+}
