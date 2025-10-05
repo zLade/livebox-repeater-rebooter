@@ -12,11 +12,6 @@ Une petite **interface Web** permet de configurer l’IP, les identifiants puis 
 
 > D’autres modèles Livebox/Repeater compatibles **API SAH** devraient fonctionner, à condition d’ajuster les commandes `curl` (RAW_CURL).
 
-## Principe (API SAH)
-
-1. Authentification via `sah.Device.Information.createContext` → récupération d’un **contextID**.
-2. Reboot via `POST /ws` : service `NMC`, méthode `reboot`, en envoyant le **contextID** (entêtes `Authorization: X-Sah <contextID>` et `X-Context`).
-3. Le script **ping** l’appareil avant/après et consigne les étapes dans un log texte.
 
 ## Points clés
 
